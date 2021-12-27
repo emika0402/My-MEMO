@@ -1,17 +1,10 @@
 <template>
     <v-layout wrap style="height: 200px;">
-
-        <v-container>
-            <v-layout justify-center>
-                <v-btn color="pink" dark @click.stop="drawer = !drawer">Toggle</v-btn>
-            </v-layout>
-        </v-container>
-
-        <v-navigation-drawer v-model="drawer" absolute temporary>
+        <v-navigation-drawer v-model="$store.state.drawer" absolute temporary>
             <v-list class="pa-1">
                 <v-list-tile avatar>
                     <v-list-tile-avatar>
-                        <img src="https://avatars2.githubusercontent.com/u/1363954?s=460&v=4">
+                        <img src="../assets/fukui.png">
                     </v-list-tile-avatar>
 
                     <v-list-tile-content>
@@ -39,9 +32,8 @@
 
 <script>
 export default {
-    data () {
+    data() {
         return {
-            drawer: false,
             items: [
                 { title: 'メモ帳', icon: 'list' }
             ]

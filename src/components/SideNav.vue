@@ -2,11 +2,14 @@
     <v-navigation-drawer v-model="$store.state.drawer" absolute temporary>
         <v-list class="pa-1">
             <v-list-tile avatar>
-                <v-list-tile-avatar>
-                    <img src="../assets/fukui.png">
+                <v-list-tile-avatar v-if="'' !== photoURL">
+                    <img :src="photoURL">
+                </v-list-tile-avatar>
+                <v-list-tile-avatar v-if="'' == photoURL">
+                    <v-icon large>account_circle</v-icon>
                 </v-list-tile-avatar>
                 <v-list-tile-content>
-                    <v-list-tile-title>福井のメモ帳</v-list-tile-title>
+                    <v-list-tile-title>{{ userName }}</v-list-tile-title>
                 </v-list-tile-content>
             </v-list-tile>
         </v-list>
@@ -25,6 +28,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
 export default {
     data() {
         return {
@@ -33,6 +38,9 @@ export default {
                 { title: 'メモ帳', icon: 'edit_note', link: { name: 'Memos'} }
             ]
         }
+    },
+    computed: {
+        ...mapGetters(['userName', 'photoURL'])
     }
 }
 </script>

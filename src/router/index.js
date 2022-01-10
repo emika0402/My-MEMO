@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Memos from '../views/Memos.vue'
+import MemoForm from '../views/MemoForm.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ const routes = [
     path: '/memos',
     name: 'Memos',
     component: Memos
+  },
+  {
+    path: '/memos/:memos_id?/edit',
+    name: 'Memo_edit',
+    component: MemoForm
   }
 ]
 

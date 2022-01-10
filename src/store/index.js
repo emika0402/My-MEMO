@@ -20,7 +20,8 @@ export default new Vuex.Store({
     toggleSideMenu(state) {
       state.drawer = !state.drawer
     },
-    addMemo(state, memo) {
+    addMemo(state, { id, memo }) {
+      memo.id = id,
       state.memos.push(memo)
     }
   },
@@ -43,9 +44,15 @@ export default new Vuex.Store({
     },
     addMemo({ getters, commit }, memo) {
       if (getters.uid) {
-        firebase.firestore().collection(`users/${getters.uid}/memos`).add(memo)
+        firebase.firestore().collection(`users/${getters.uid}/memos`).add(memo).then(doc => {
+          commit('addMemo',{ id: doc.id, memo })
+        })
       }
-      commit('addMemo',memo)
+    },
+    fetchMemos({ getters, commit }) {
+      firebase.firestore().collection(`users/${getters.uid}/memos`).get().then(snapshot => {
+        snapshot.forEach(doc => commit('addMemo', { id: doc.id, memo: doc.data() }))
+      })
     }
   },
   getters: {

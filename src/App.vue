@@ -32,6 +32,7 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setLoginUser(user)
+        this.fetchMemos()
         if (this.$router.currentRoute.name === 'Home') {
           this.$router.push({ name: 'Memos' })
         }
@@ -47,7 +48,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['toggleSideMenu', 'setLoginUser', 'logout', 'deleteLoginUser'])
+    ...mapActions(['toggleSideMenu', 'setLoginUser', 'logout', 'deleteLoginUser', 'fetchMemos'])
   },
 }
 </script>

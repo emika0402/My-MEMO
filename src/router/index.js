@@ -26,7 +26,7 @@ const routes = [
     component: Memos
   },
   {
-    path: '/memos/:memos_id?/edit',
+    path: '/memos/:memo_id?/edit',
     name: 'Memo_edit',
     component: MemoForm
   }

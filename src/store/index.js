@@ -41,12 +41,16 @@ export default new Vuex.Store({
     toggleSideMenu({ commit }) {
       commit('toggleSideMenu')
     },
-    addMemo({ commit }, memo) {
+    addMemo({ getters, commit }, memo) {
+      if (getters.uid) {
+        firebase.firestore().collection(`users/${getters.uid}/memos`).add(memo)
+      }
       commit('addMemo',memo)
     }
   },
   getters: {
-    userName: state => state.login_user? state.login_user.displayName : 'Not Logged !',
-    photoURL: state => state.login_user? state.login_user.photoURL : ''
+    userName: state => state.login_user? state.login_user.displayName : '',
+    photoURL: state => state.login_user? state.login_user.photoURL : '',
+    uid: state => state.login_user? state.login_user.uid : null
   }
 })

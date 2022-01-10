@@ -5,7 +5,7 @@
                 <v-card>
                     <v-card-text>
                         <v-form>
-                            <v-text-field v-model="memo.date" label="日付"></v-text-field>
+                            <v-text-field disabled v-model="memo.date" label="日付"></v-text-field>
                             <v-text-field v-model="memo.memo" label="メモ"></v-text-field>
                             <v-btn @click="$router.push({ name: 'Memos' })">キャンセル</v-btn>
                             <v-btn color="primary" @click="submit">保存</v-btn>

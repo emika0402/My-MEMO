@@ -4,9 +4,9 @@
             <v-flex xs12 mt-3 justify-center>
                 <v-flex xs12 text-xs-right>
                     <router-link :to="{ name: 'Memo_edit' }">
-                        <v-tooltip bottom>
+                        <v-tooltip bottom color="#87cefa">
                             <template v-slot:activator="{ on }">
-                                <v-btn color="primary" v-on="on" dark flat icon>
+                                <v-btn color="#87cefa" v-on="on" dark flat icon>
                                     <v-icon large>{{ icon }}</v-icon>
                                 </v-btn>
                             </template>
@@ -20,7 +20,7 @@
                         <td class="text-xs-left">{{ props.item.date }}</td>
                         <td class="text-xs-left">{{ props.item.memo }}</td>
                         <td class="text-xs-left">
-                            <v-tooltip bottom>
+                            <v-tooltip bottom color="#9acd32">
                                 <template v-slot:activator="{ on }">
                                     <span>
                                         <router-link :to="{ name: 'Memo_edit', params: { memo_id: props.item.id } }">
@@ -30,7 +30,7 @@
                                 </template>
                                 <span>edit</span>
                             </v-tooltip>
-                            <v-tooltip bottom>
+                            <v-tooltip bottom color="#f08080">
                                 <template v-slot:activator="{ on }">
                                     <span>
                                         <v-icon class="delete mr-3" small v-on="on" @click="deleteConfirm(props.item.id)">delete</v-icon>
@@ -81,12 +81,12 @@ a {
 }
 
 .edit:hover {
-    color: darkorange;
-    opacity: 0.7;
+    color: #9acd32;
+    opacity: 0.6;
 }
 
 .delete:hover {
-    color: darkred;
-    opacity: 0.7;
+    color: #f08080;
+    opacity: 0.6;
 }
 </style>

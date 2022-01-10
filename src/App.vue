@@ -3,7 +3,7 @@
     <v-toolbar app>
       <v-toolbar-side-icon v-show="$store.state.login_user" @click="toggleSideMenu"></v-toolbar-side-icon>
       <v-toolbar-title class="headline text-uppercase">
-        <span>福井のメモ帳</span>
+        <span> 𓂃 ✍︎</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items v-if="$store.state.login_user">

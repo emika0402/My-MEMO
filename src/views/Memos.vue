@@ -24,11 +24,19 @@
                                 <template v-slot:activator="{ on }">
                                     <span>
                                         <router-link :to="{ name: 'Memo_edit', params: { memo_id: props.item.id } }">
-                                            <v-icon class="edit" small v-on="on">edit</v-icon>
+                                            <v-icon class="edit mr-3" small v-on="on">edit</v-icon>
                                         </router-link>
                                     </span>
                                 </template>
                                 <span>edit</span>
+                            </v-tooltip>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on }">
+                                    <span>
+                                        <v-icon class="delete mr-3" small v-on="on" @click="deleteConfirm(props.item.id)">delete</v-icon>
+                                    </span>
+                                </template>
+                                <span>delete</span>
                             </v-tooltip>
                         </td>
                     </template>
@@ -39,6 +47,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
+
 export default {
     created() {
         this.memos = this.$store.state.memos
@@ -53,7 +63,15 @@ export default {
             memos: [],
             icon: 'add_circle'
         }
-    }
+    },
+    methods: {
+        deleteConfirm(id) {
+            if (confirm('削除する？')) {
+                this.deleteMemo({ id })
+            }
+        },
+        ...mapActions(['deleteMemo'])
+    },
 }
 </script>
 
@@ -64,6 +82,11 @@ a {
 
 .edit:hover {
     color: darkorange;
+    opacity: 0.7;
+}
+
+.delete:hover {
+    color: darkred;
     opacity: 0.7;
 }
 </style>

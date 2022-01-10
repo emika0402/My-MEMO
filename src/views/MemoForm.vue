@@ -34,6 +34,7 @@ export default {
         return {
             memo: {
                 date: new Date().toLocaleDateString(),
+                is_delete: false
             }
         }
     },
@@ -45,9 +46,7 @@ export default {
                 this.addMemo(this.memo)
             }
             this.$router.push({ name: 'Memos' })
-            this.memo = {
-                date: new Date().toLocaleDateString(),
-                }
+            this.memo = {}
             },
         ...mapActions(['addMemo', 'updateMemo'])
     },

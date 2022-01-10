@@ -21,13 +21,17 @@ export default new Vuex.Store({
       state.drawer = !state.drawer
     },
     addMemo(state, { id, memo }) {
-      memo.id = id,
+      memo.id = id
       state.memos.push(memo)
     },
-    updateMemo(state, {id, memo }) {
+    updateMemo(state, { id, memo }) {
       const index = state.memos.findIndex(memo => memo.id === id)
       state.memos[index] = memo
-    }
+    },
+    deleteMemo(state, { id }) {
+      const index = state.memos.findIndex(memo => memo.id === id)
+      state.memos.splice(index, 1)
+    },
   },
   actions: {
     setLoginUser({ commit }, user) {
@@ -54,13 +58,18 @@ export default new Vuex.Store({
       }
     },
     fetchMemos({ getters, commit }) {
-      firebase.firestore().collection(`users/${getters.uid}/memos`).get().then(snapshot => {
+      firebase.firestore().collection(`users/${getters.uid}/memos`).where("is_delete", "==", false).get().then(snapshot => {
         snapshot.forEach(doc => commit('addMemo', { id: doc.id, memo: doc.data() }))
       })
     },
     updateMemo({ getters, commit }, { id, memo }) {
       firebase.firestore().collection(`users/${getters.uid}/memos`).doc(id).update(memo).then(() => {
         commit('updateMemo', { id, memo })
+      })
+    },
+    deleteMemo({ getters, commit }, { id, memo }) {
+      firebase.firestore().collection(`users/${getters.uid}/memos`).doc(id).update({is_delete: true}).then(() => {
+        commit('deleteMemo', { id, memo })
       })
     }
   },
